@@ -1,0 +1,3 @@
+# Ignore asset files
+asset-files/
+backend/spring-boot-ecommerce
