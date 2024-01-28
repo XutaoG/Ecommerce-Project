@@ -104,29 +104,29 @@ export class ProductListComponent implements OnInit
 
 	// ***** OLD *****
 
-	processResult() 
-	{
-		return (data: any) => 
-		{
-			this.products = data._embedded.products;
-			this.pageNumber = data.page.number + 1;
-			this.pageSize = data.page.size;
-			this.totalElements = data.page.totalElements;
-		};
-	}
-		
-	// ***** NEW *****
-	
-	// processResult(): any
+	// processResult() 
 	// {
 	// 	return (data: any) => 
 	// 	{
-	// 		this.products = data.content;
-	// 		this.pageNumber = data.pageNumber + 1;
-	// 		this.pageSize = data.pageSize;
-	// 		this.totalElements = data.totalElements;
+	// 		this.products = data._embedded.products;
+	// 		this.pageNumber = data.page.number + 1;
+	// 		this.pageSize = data.page.size;
+	// 		this.totalElements = data.page.totalElements;
 	// 	};
 	// }
+		
+	// ***** NEW *****
+	
+	processResult(): any
+	{
+		return (data: any) => 
+		{
+			this.products = data.content;
+			this.pageNumber = data.pageNumber + 1;
+			this.pageSize = data.pageSize;
+			this.totalElements = data.totalElements;
+		};
+	}
 	
 	updatePageSize(pageSize: string): void
 	{

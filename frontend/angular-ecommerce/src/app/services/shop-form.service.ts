@@ -33,28 +33,10 @@ export class ShopFormService
 
 	// ***** OLD *****
 
-	getCountries(): Observable<Country[]>
-	{
-		return this.httpClient.get<GetResponseCountries>(this.countryUrl).pipe(map(
-			response => response._embedded.countries)
-		);
-	}
-
-	getStates(countryCode: string): Observable<State[]>
-	{
-		let searchUrl: string = `${this.stateUrl}/search/findByCountryCode?code=${countryCode}`;
-
-		return this.httpClient.get<GetResponseState>(searchUrl).pipe(map(
-			response => response._embedded.states)
-		);
-	}
-
-	// ***** NEW *****
-
 	// getCountries(): Observable<Country[]>
 	// {
-	// 	return this.httpClient.get<CountryListResponse>(this.countryUrl).pipe(map(
-	// 		response => response.content)
+	// 	return this.httpClient.get<GetResponseCountries>(this.countryUrl).pipe(map(
+	// 		response => response._embedded.countries)
 	// 	);
 	// }
 
@@ -62,38 +44,56 @@ export class ShopFormService
 	// {
 	// 	let searchUrl: string = `${this.stateUrl}/search/findByCountryCode?code=${countryCode}`;
 
-	// 	return this.httpClient.get<StateListResponse>(searchUrl).pipe(map(
-	// 		response => response.content)
+	// 	return this.httpClient.get<GetResponseState>(searchUrl).pipe(map(
+	// 		response => response._embedded.states)
 	// 	);
 	// }
+
+	// ***** NEW *****
+
+	getCountries(): Observable<Country[]>
+	{
+		return this.httpClient.get<CountryListResponse>(this.countryUrl).pipe(map(
+			response => response.content)
+		);
+	}
+
+	getStates(countryCode: string): Observable<State[]>
+	{
+		let searchUrl: string = `${this.stateUrl}/search/findByCountryCode?code=${countryCode}`;
+
+		return this.httpClient.get<StateListResponse>(searchUrl).pipe(map(
+			response => response.content)
+		);
+	}
 }
 
 // ***** OLD *****
 
-interface GetResponseCountries
-{
-	_embedded:
-	{
-		countries: Country[];
-	};
-}
+// interface GetResponseCountries
+// {
+// 	_embedded:
+// 	{
+// 		countries: Country[];
+// 	};
+// }
 
-interface GetResponseState
-{
-	_embedded:
-	{
-		states: State[];
-	};
-}
+// interface GetResponseState
+// {
+// 	_embedded:
+// 	{
+// 		states: State[];
+// 	};
+// }
 
 // ***** NEW *****
 
-// interface CountryListResponse
-// {
-// 	content: Country[];
-// }
+interface CountryListResponse
+{
+	content: Country[];
+}
 
-// interface StateListResponse
-// {
-// 	content: State[];
-// }
+interface StateListResponse
+{
+	content: State[];
+}
